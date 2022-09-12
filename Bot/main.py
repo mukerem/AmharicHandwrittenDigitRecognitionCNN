@@ -40,17 +40,24 @@ def predict(update, context):
 
     
     prediction = model.predict(x)[0]
-    classes = ['1', '10', '100', '1000', '2', '20', '3', '30', '4', '40', '5', '50', '6', '60', '7', '70', '8', '80', '9', '90']
+    classes = ['1', '10', '100', '10000', '2', '20', '3', '30', '4', '40', '5', '50', '6', '60', '7', '70', '8', '80', '9', '90']
     result = [(prediction[i], classes[i]) for i in range(20)]
     result.sort(reverse=1)
     accuracy = 100 * result[0][0]
     accuracy = accuracy * 10000 // 100 / 100
-    update.message.reply_text(
-        f"The predicted value is {result[0][1]} with a probability {accuracy:.2f}%",
-        reply_markup=ReplyKeyboardRemove())
-    update.message.reply_text(
-        "Send your drawing for prediction",
-        reply_markup=ReplyKeyboardRemove())
+    threshold = 60
+    print(accuracy, result[0][1])
+    if accuracy >= threshold:
+        update.message.reply_text(
+            f"The predicted value is {result[0][1]} with a probability {accuracy:.2f}%",
+            reply_markup=ReplyKeyboardRemove())
+        update.message.reply_text(
+            "Send your drawing for prediction",
+            reply_markup=ReplyKeyboardRemove())
+    else:
+        update.message.reply_text(
+            "Please try again",
+            reply_markup=ReplyKeyboardRemove())
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO

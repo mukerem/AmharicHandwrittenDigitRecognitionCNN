@@ -25,7 +25,7 @@ class DigitRecognitionAPI(ViewSet):
 
         model = model_construct()
         prediction = model.predict(x)[0]
-        classes = ['1', '10', '100', '1000', '2', '20', '3', '30', '4', '40', '5', '50', '6', '60', '7', '70', '8', '80', '9', '90']
+        classes = ['1', '10', '100', '10000', '2', '20', '3', '30', '4', '40', '5', '50', '6', '60', '7', '70', '8', '80', '9', '90']
         result = [(prediction[i], classes[i]) for i in range(20)]
         result.sort(reverse=1)
         return Response(
@@ -47,7 +47,7 @@ class DigitRecognitionAPI(ViewSet):
         x = process_batch_image(images)
         model = model_construct()
         predictions = model.predict(x)
-        classes = ['1', '10', '100', '1000', '2', '20', '3', '30', '4', '40', '5', '50', '6', '60', '7', '70', '8', '80', '9', '90']
+        classes = ['1', '10', '100', '10000', '2', '20', '3', '30', '4', '40', '5', '50', '6', '60', '7', '70', '8', '80', '9', '90']
         response = {}
         for idx, prediction in enumerate(predictions):
             result = [(prediction[i], classes[i]) for i in range(20)]
