@@ -1,2 +1,2 @@
 # AmharicHandwrittenDigitRecognitionCNN
-Amharic Handwritten Digit Recognition using CNN
+Handwritten Gee'z Digit Recognition using CNN
